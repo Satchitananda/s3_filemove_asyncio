@@ -23,6 +23,7 @@ Run django development server
 python manage.py runserver
 ```
 Locate your browser to 'http://localhost:8000'
+
 Run these commands to fill up sample files and move them across the buckets
 ```
 python manage.py create_files N > files.txt
