@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File moving monitor</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      setInterval(function(){
+        $.ajax({
+            method: 'GET'
+          }).done(function(result){
+            $(result).each(function(i, e){
+              var id = e[0];
+              var filename = e[1];
+              var status = e[2];
+              var selector = $('#r_'+id);
+              var conent = filename + ' <strong>'+status+'</strong>';
+
+              if (selector.length > 0) {
+                selector.html(conent);
+              } else {
+                $("#container").prepend('<li id="r_'+id+'">'+conent+'</li>');
+              }
+            });
+        });
+      }, 1000);
+    });
+  </script>
+</head>
+<body>
+  <ul id="container">
+  {% for request in move_requests %}
+    <li id="r_{{ request.id }}">{{ request.filename }} <strong>{{ request.get_status_display }}</strong></li>
+  {% endfor %}
+  </ul>
+</body>
+</html>
