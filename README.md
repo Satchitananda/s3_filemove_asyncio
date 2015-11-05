@@ -30,3 +30,5 @@ python manage.py create_files N > files.txt
 python manage.py move_files -f files.txt
 ```
 Watch the progress
+
+Requires Python 3.4+ or Python 3.3 with asyncio.
